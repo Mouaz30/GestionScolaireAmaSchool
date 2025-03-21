@@ -40,7 +40,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.cmbClasse = new System.Windows.Forms.ComboBox();
+            this.cmbUser = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -155,13 +155,13 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // cmbClasse
+            // cmbUser
             // 
-            this.cmbClasse.FormattingEnabled = true;
-            this.cmbClasse.Location = new System.Drawing.Point(168, 344);
-            this.cmbClasse.Name = "cmbClasse";
-            this.cmbClasse.Size = new System.Drawing.Size(151, 28);
-            this.cmbClasse.TabIndex = 13;
+            this.cmbUser.FormattingEnabled = true;
+            this.cmbUser.Location = new System.Drawing.Point(168, 344);
+            this.cmbUser.Name = "cmbUser";
+            this.cmbUser.Size = new System.Drawing.Size(151, 28);
+            this.cmbUser.TabIndex = 13;
             // 
             // label4
             // 
@@ -169,9 +169,9 @@
             this.label4.Location = new System.Drawing.Point(64, 344);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 20);
+            this.label4.Size = new System.Drawing.Size(88, 20);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Classes";
+            this.label4.Text = "Utilisateurs";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // GestionProfesseurs
@@ -180,7 +180,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 445);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbClasse);
+            this.Controls.Add(this.cmbUser);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
@@ -218,7 +218,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.ComboBox cmbClasse;
+        private System.Windows.Forms.ComboBox cmbUser;
         private System.Windows.Forms.Label label4;
     }
 }

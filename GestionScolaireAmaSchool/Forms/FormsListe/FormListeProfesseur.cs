@@ -11,21 +11,22 @@ using GestionScolaireAmaSchool.Data;
 
 namespace GestionScolaireAmaSchool.Forms.FormsListe
 {
-    public partial class FormListeMatieres : Form
+    public partial class FormListeProfesseur : Form
     {
         private DbContextAmaSchool Db;
         
-        public FormListeMatieres()
+              
+        public FormListeProfesseur()
         {
             InitializeComponent();
             Db = new DbContextAmaSchool();
         }
 
-        private void FormListeMatieres_Load(object sender, EventArgs e)
+        private void FormListeProfesseur_Load(object sender, EventArgs e)
         {
-            dtgvMatiere.DataSource = null;
-            var liste = Db.Matiere.ToList();
+            dtgvProfesseur.DataSource = null;
+            var liste = Db.Professeur.ToList();
+            
         }
-
     }
 }

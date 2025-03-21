@@ -39,12 +39,12 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 
         private void btnAjouterCours_Click(object sender, EventArgs e)
         {
+           
+            string NomCours = txtCours.Text;
+            string description = txtDescriptionCours.Text;
             string nomMatiere = cmbMatiere.Text;
             int idMatiere = db.Matiere.Where(m => m.NomMatiere == nomMatiere).Select(m => m.Id).FirstOrDefault();
-            string NomCours = txtNomCours.Text;
-            string description = txtDescriptionCours.Text;
-            string matiere = cmbMatiere.Text;
-            
+
             if (string.IsNullOrEmpty(NomCours) || string.IsNullOrEmpty(description))
             {
                 MessageBox.Show("veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,38 +55,134 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
             c.Description = description;
             db.Cour.Add(c);
             CoursMatieres coursMatieres = new CoursMatieres();
-            coursMatieres.CoursId = c.Id;
-            coursMatieres.MatiereId = idMatiere;
+            coursMatieres.IdCours = c.Id;
+            coursMatieres.IdMatiere = idMatiere;
             db.coursMatiere.Add(coursMatieres);
             db.SaveChanges();
-            MessageBox.Show(idMatiere.ToString());
+    
             MessageBox.Show("Cours ajouté avec succès", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Refresh();
+           refresh();
 
            
         }
 
 
-        public void Refresh()
+        public void refresh()
         {
             dataGridView1.DataSource = null;
-           
 
-            //  var cours = db.Cour.Select(c => new {c.Id,c.NomCours,c.Description,c.IdMatiere});
-            //dataGridView1.DataSource = db..ToList();
+
+            var cours =  db.coursMatiere.Select(c => new {c.Cours.Id,c.Cours.NomCours,c.Cours.Description,c.Matieres.NomMatiere}).ToList();
+            dataGridView1.DataSource = cours;
           
         }
 
 
         private void FormGestionCoursMatiere_Load(object sender, EventArgs e)
         {
+           
              var matiere = db.Matiere.ToList();
              cmbMatiere.DataSource = null;
              cmbMatiere.DataSource = matiere;
              cmbMatiere.DisplayMember = "NomMatiere";
              cmbMatiere.ValueMember = "Id";
+            refresh();
 
         }
+
+        private void btnModifierCours_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            if (dataGridView1.CurrentRow != null)
+            {
+                
+                int id = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+
+                using (var db = new DbContextAmaSchool())
+                {
+                   
+                    var personne = db.Cour.Find(id);
+
+                    if (personne != null)
+                    {
+                       
+                        txtCours.Text = personne.NomCours;
+                        txtDescriptionCours.Text = personne.Description;
+                        cmbMatiere.Text = db.Matiere.Where(m => m.Id == db.coursMatiere.Where(c => c.IdCours == id).Select(c => c.IdMatiere).FirstOrDefault()).Select(m => m.NomMatiere).FirstOrDefault();
+
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("cour non trouvée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une ligne valide.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int id = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+                var cours = db.Cour.Find(id);
+                if (cours != null)
+                {
+                    cours.NomCours = txtCours.Text;
+                    cours.Description = txtDescriptionCours.Text;
+                    cours.Id = db.coursMatiere.Where(c => c.IdCours == id).Select(c => c.IdCours).FirstOrDefault();
+                    db.SaveChanges();
+                    MessageBox.Show("Cours modifié avec succès", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Cours non trouvée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnSupprimerCours_Click(object sender, EventArgs e)
+        {
+
+            using (var db = new DbContextAmaSchool())
+            {
+                int id = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+                var personne = db.Cour.Find(id);
+
+                db.Cour.Remove(personne);
+                db.SaveChanges();
+                MessageBox.Show("Cours supprimer avec succés", "succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                refresh();
+                clear();
+
+            }
+
+           
+
+        }
+
+        public void clear()
+        {
+            txtCours.Text = string.Empty;
+            txtDescriptionCours.Text = string.Empty;
+            cmbMatiere.Text = string.Empty;
+           
+        }
+
+       
     }
 }
     

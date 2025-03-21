@@ -31,10 +31,10 @@
             this.btnDeleteClasse = new System.Windows.Forms.Button();
             this.btnEditClass = new System.Windows.Forms.Button();
             this.btnAddClass = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewClasse = new System.Windows.Forms.DataGridView();
             this.txtNomClasse = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClasse)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDeleteClasse
@@ -71,18 +71,19 @@
             this.btnAddClass.UseVisualStyleBackColor = true;
             this.btnAddClass.Click += new System.EventHandler(this.btnAddClass_Click);
             // 
-            // dataGridView1
+            // dataGridViewClasse
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(431, 66);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(309, 228);
-            this.dataGridView1.TabIndex = 9;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
+            this.dataGridViewClasse.AllowUserToAddRows = false;
+            this.dataGridViewClasse.AllowUserToDeleteRows = false;
+            this.dataGridViewClasse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewClasse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewClasse.Location = new System.Drawing.Point(421, 66);
+            this.dataGridViewClasse.Name = "dataGridViewClasse";
+            this.dataGridViewClasse.ReadOnly = true;
+            this.dataGridViewClasse.Size = new System.Drawing.Size(319, 228);
+            this.dataGridViewClasse.TabIndex = 9;
+            this.dataGridViewClasse.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridViewClasse.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
             // txtNomClasse
             // 
@@ -107,17 +108,17 @@
             this.AcceptButton = this.btnEditClass;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(839, 450);
             this.Controls.Add(this.btnDeleteClasse);
             this.Controls.Add(this.btnEditClass);
             this.Controls.Add(this.btnAddClass);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewClasse);
             this.Controls.Add(this.txtNomClasse);
             this.Controls.Add(this.label2);
             this.Name = "FormGestionClasse";
             this.Text = "FormGestionClasse";
             this.Load += new System.EventHandler(this.FormGestionClasse_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClasse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,7 +129,7 @@
         private System.Windows.Forms.Button btnDeleteClasse;
         private System.Windows.Forms.Button btnEditClass;
         private System.Windows.Forms.Button btnAddClass;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewClasse;
         private System.Windows.Forms.TextBox txtNomClasse;
         private System.Windows.Forms.Label label2;
     }

@@ -17,11 +17,5 @@ namespace GestionScolaireAmaSchool.Entity
         public string NomClasse { get; set; }
 
         public virtual ICollection<Etudiants> Etudiants { get; set; } = new List<Etudiants>();
-        public virtual ICollection<Cours> Cours { get; set; } = new List<Cours>();
-
-        public virtual ICollection<Professeurs> Professeurs { get; set; } = new List<Professeurs>();
-
-        public virtual ICollection<Notes> Notes { get; set; } = new List<Notes>();
-
     }
 }

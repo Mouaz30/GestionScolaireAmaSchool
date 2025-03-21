@@ -15,7 +15,6 @@ namespace GestionScolaireAmaSchool.Entity
         [ForeignKey("Classes")]
         public int IdClasse { get; set; }
         public virtual Classes Classes { get; set; }
-
         [Key, Column(Order = 2)]
         [ForeignKey("Cours")]
         public int IdCours { get; set; }

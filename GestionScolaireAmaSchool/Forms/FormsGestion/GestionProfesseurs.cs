@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestionScolaireAmaSchool.Data;
@@ -14,7 +16,7 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 {
     public partial class GestionProfesseurs : Form
     {
-        private DbContextAmaSchool db ;
+        private DbContextAmaSchool db;
         public GestionProfesseurs()
         {
             db = new DbContextAmaSchool();
@@ -23,15 +25,16 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 
         private void GestionProfesseurs_Load(object sender, EventArgs e)
         {
-            var classe = db.Classe.ToList();
-            cmbClasse.DataSource = null;
+            var utlisateur = db.Utilisateur.ToList();
+            cmbUser.DataSource = null;
 
-            cmbClasse.DataSource = classe;
-            cmbClasse.DisplayMember = "NomClasse";
-            cmbClasse.ValueMember = "Id";
+            cmbUser.DataSource = utlisateur;
+            cmbUser.DisplayMember = "NomUtilisateur";
+            cmbUser.ValueMember = "Id";
 
-            refresh();
+           refresh();
         }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -41,13 +44,37 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
                 String PrenomProf = txtprenomProf.Text;
                 String EmailProf = txtemailProf.Text;
                 String Telephone = txtPhoneProf.Text;
-                string NomClasse = cmbClasse.Text;
-                int idClasse = db.Classe.Where(c => c.NomClasse == NomClasse).Select(c => c.Id).FirstOrDefault();
+                string NomUser = cmbUser.Text;
+                Utilisateurs utilisateurs = db.Utilisateur.Where(C => C.NomUtilisateur == NomUser).FirstOrDefault();
 
-               
+                try
+                {
+                    Professeurs pr = new Professeurs();
+                    pr.Nom = NomProf;
+                    pr.Prenom = PrenomProf;
+                    pr.Email = EmailProf;
+                    pr.Telephone = Telephone;
+                    pr.Utilisateur = utilisateurs;
 
-               
+                    db.Professeur.Add(pr);
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Console.WriteLine($"Propriété: {validationError.PropertyName} Erreur: {validationError.ErrorMessage}");
+                        }
+                    }
+                }
 
+
+                Refresh();
+                MessageBox.Show("prof ajouter aavec succes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+                
                 if (string.IsNullOrEmpty(NomProf) || string.IsNullOrEmpty(PrenomProf) || string.IsNullOrEmpty(EmailProf) || string.IsNullOrEmpty(Telephone))
                 {
                     MessageBox.Show("veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -60,51 +87,25 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
                         MessageBox.Show("Veuillez entrer un numéro de téléphone valide", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    //if (!IsValidEmail(EmailProf))
-                    //{
-                    //    MessageBox.Show("Veuillez entrer une adresse e-mail valide", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //    return;
-                    //}
-
-
-
-                    //string syntaxe = "exemple.com"; 
-                    //if (!EmailProf.EndsWith("@" + syntaxe, StringComparison.OrdinalIgnoreCase))
-                    //{
-                    //    MessageBox.Show("Veuillez utiliser une adresse e-mail du domaine {syntaxe}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //    return;
-                    //}
-                    Professeurs pr = new Professeurs();
-                    pr.Nom = NomProf;
-                    pr.Prenom = PrenomProf;
-                    pr.Email = EmailProf;
-                    pr.Telephone = Telephone;
-                    pr.c
-                  
-
-                    ProfesseursClasses professeursClasses = new ProfesseursClasses();
-                    professeursClasses.IdClasse = idClasse;
-                    professeursClasses.IdProfesseur = pr.Id;
-                    db.ProfesseursClasse.Add(professeursClasses);
-                    db.Professeur.Add(pr);
-                    db.SaveChanges();
-
-                    refresh();
+                   
+                   
                 }
             }
         }
 
-        //private bool IsValidEmail(string emailProf)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
+
 
         public void refresh()
         {
-           dataGridView1.DataSource = null;
-           dataGridView1.DataSource = new DbContextAmaSchool().Professeur.ToList();
-        }
+            using (var db = new DbContextAmaSchool())
+            {
 
+                dataGridView1.DataSource = null;
+                var proflist = db.Professeur.ToList();
+                dataGridView1.DataSource = proflist;
+            }
+        }
         private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (dataGridView1.CurrentRow != null)
@@ -191,5 +192,8 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
         {
 
         }
+
     }
 }
+
+

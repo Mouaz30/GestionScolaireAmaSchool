@@ -1,6 +1,6 @@
 ﻿namespace GestionScolaireAmaSchool.Forms.FormsListe
 {
-    partial class FormListeCours
+    partial class FormListeUtilisateur
     {
         /// <summary>
         /// Required designer variable.
@@ -28,36 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dtgvCour = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvCour)).BeginInit();
+            this.dtgvUtilisateur = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvUtilisateur)).BeginInit();
             this.SuspendLayout();
             // 
-            // dtgvCour
+            // dtgvUtilisateur
             // 
-            this.dtgvCour.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvCour.Location = new System.Drawing.Point(124, 70);
-            this.dtgvCour.Name = "dtgvCour";
-            this.dtgvCour.RowHeadersWidth = 62;
-            this.dtgvCour.RowTemplate.Height = 28;
-            this.dtgvCour.Size = new System.Drawing.Size(817, 288);
-            this.dtgvCour.TabIndex = 1;
+            this.dtgvUtilisateur.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvUtilisateur.Location = new System.Drawing.Point(86, 87);
+            this.dtgvUtilisateur.Name = "dtgvUtilisateur";
+            this.dtgvUtilisateur.RowHeadersWidth = 62;
+            this.dtgvUtilisateur.RowTemplate.Height = 28;
+            this.dtgvUtilisateur.Size = new System.Drawing.Size(745, 276);
+            this.dtgvUtilisateur.TabIndex = 1;
             // 
-            // FormListeCours
+            // FormListeUtilisateur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 450);
-            this.Controls.Add(this.dtgvCour);
-            this.Name = "FormListeCours";
-            this.Text = "FormListeCours";
-            this.Load += new System.EventHandler(this.FormListeCours_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvCour)).EndInit();
+            this.ClientSize = new System.Drawing.Size(983, 450);
+            this.Controls.Add(this.dtgvUtilisateur);
+            this.Name = "FormListeUtilisateur";
+            this.Text = "FormListeUtilisateur";
+            this.Load += new System.EventHandler(this.FormListeUtilisateur_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvUtilisateur)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dtgvCour;
+        private System.Windows.Forms.DataGridView dtgvUtilisateur;
     }
 }

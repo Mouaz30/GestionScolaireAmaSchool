@@ -20,10 +20,10 @@ namespace GestionScolaireAmaSchool.Entity
 
         [Required]
         [MaxLength(10)]
-        public string Code { get; set; } // Code OTP envoyé par SMS
+        public string Code { get; set; } // C et le code Otp a envoyer par sms
 
         [Required]
-        public DateTime DateExpiration { get; set; } // Date d'expiration du code
+        public DateTime DateExpiration { get; set; } //c est la date d expiration d code
     }
 }
 

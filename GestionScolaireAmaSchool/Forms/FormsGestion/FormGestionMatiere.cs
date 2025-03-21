@@ -41,6 +41,7 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
                     db.Matiere.Add(mat);
                     db.SaveChanges();
                     MessageBox.Show("Matière ajoutée avec succès", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clear();
                     Refresh();
                     txtMatiere.Text = "";
 
@@ -107,8 +108,13 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 
                 db.SaveChanges();
                 MessageBox.Show("Info Matiere modifiée avec succès", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                clear();
                 Refresh();
             }
+        }
+        public void clear()
+        {
+           txtMatiere.Text = string.Empty;
         }
 
         private void btnSupprimerMatiere_Click(object sender, EventArgs e)

@@ -88,12 +88,14 @@
             // 
             // btnSupprimerCours
             // 
+            this.btnSupprimerCours.AccessibleName = "btnDelete";
             this.btnSupprimerCours.Location = new System.Drawing.Point(422, 344);
             this.btnSupprimerCours.Name = "btnSupprimerCours";
             this.btnSupprimerCours.Size = new System.Drawing.Size(121, 24);
             this.btnSupprimerCours.TabIndex = 10;
             this.btnSupprimerCours.Text = "Supprimer";
             this.btnSupprimerCours.UseVisualStyleBackColor = true;
+            this.btnSupprimerCours.Click += new System.EventHandler(this.btnSupprimerCours_Click);
             // 
             // button1
             // 
@@ -103,6 +105,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Modifier";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnAjouterCours
             // 
@@ -124,6 +127,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(351, 216);
             this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDoubleClick);
             // 
             // cmbMatiere
             // 

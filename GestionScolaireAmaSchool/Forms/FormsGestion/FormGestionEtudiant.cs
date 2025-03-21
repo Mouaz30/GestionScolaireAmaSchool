@@ -62,25 +62,19 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
                     et.Email = Email;
                     et.Telephone = Telephone;
                     et.IdClasse = (int)cmbClasses.SelectedValue;
-                    Classes cl = db.Classe.Find(et.IdClasse);// pour gerer la recuperation des classes  sur le combobox
-                    et.Classes = cl;   // pour gerer la recuperation des classes sur le combobox
-
-
-
+                    Classes cl = db.Classe.Find(et.IdClasse);
+                    et.Classes = cl;                   
 
                     db.Etudiant.Add(et);
                     db.SaveChanges();
+                   
                     MessageBox.Show("Etudiant Enregistrer avec succes", "succés", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clear();
                     refresh();
-                   // clear();
+                   
 
 
                 }
-
-
-
-
-
 
             }
         }
@@ -96,8 +90,27 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
                 
                 cmbClasses.DataSource = db.Classe.ToList();
                 cmbClasses.DisplayMember = "NomClasse"; 
-                cmbClasses.ValueMember = "Id"; // pour gerer la recuperation des classes
-                
+                cmbClasses.ValueMember = "Id"; 
+
+                int selectedClassId = (int)cmbClasses.SelectedValue;
+                var Etu = db.Etudiant
+                    .Where(e => e.IdClasse == selectedClassId)
+                    .Select(c => new
+                    {
+                        c.Id,
+                        c.Nom,
+                        c.Prenom,
+                        c.Matricule,
+                        c.DateNaissance,
+                        c.Email,
+                        c.Sexe,
+                        c.Telephone,
+                        c.Adresse,
+                        Classes = c.Classes.NomClasse
+                    });
+
+                dataGridView1.DataSource = Etu.ToList();
+
             }
 
         }
@@ -194,6 +207,22 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
             }
         }
 
+        public void clear()
+        {
+            txtMatEtu.Text = string.Empty;
+            txtNomEtu.Text = string.Empty;
+            txtPrenomEtu.Text = string.Empty;
+            txtDateNaiss.Text = string.Empty;
+            txtAddresse.Text = string.Empty;
+            txtPhone.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            rbSexe.Text = string.Empty;
+            cmbClasses.Text = string.Empty;
+            
+
+
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
 
@@ -211,7 +240,8 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
                
                 var results = db.Etudiant
                     .Where(p => p.Matricule.ToLower().Contains(searchValue.ToLower()) ||
-                                 p.Nom.ToLower().Contains(searchValue.ToLower()))
+                                 p.Nom.ToLower().Contains(searchValue.ToLower())   ||
+                                  p.Matricule.ToLower().Contains(searchValue.ToLower())) 
                     .ToList();
 
                

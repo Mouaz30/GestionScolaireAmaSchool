@@ -7,14 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GestionScolaireAmaSchool.Data;
 
 namespace GestionScolaireAmaSchool.Forms.FormsListe
 {
     public partial class FormListeCours : Form
     {
+        private DbContextAmaSchool Db;
+        
         public FormListeCours()
-        {
+        {     
+            Db = new DbContextAmaSchool();
+
             InitializeComponent();
+        }
+
+        private void FormListeCours_Load(object sender, EventArgs e)
+        {
+            dtgvCour.DataSource = null;
+            var liste = Db.Cour.ToList();
         }
     }
 }

@@ -18,15 +18,18 @@ namespace GestionScolaireAmaSchool.Entity
 
         [Required]
         [MaxLength(255)]
-        public string MotDePasse { get; set; } // Stockage sécurisé recommandé (hachage)
+        public string MotDePasse { get; set; } 
 
         [Required]
         [MaxLength(20)]
-        public string Role { get; set; } // Peut être limité à "Administrateur", "DE", "Agent", "Professeur"
+        public string Role { get; set; } 
 
         [MaxLength(15)]
         [Phone]
-        public string Telephone { get; set; } // Pour l'A2F par SMS
+        //avec le telephone nous allons gere A2F
+        public string Telephone { get; set; }
+        public virtual ICollection<Professeurs> Professeurs { get; set; }
+
     }
 }
   

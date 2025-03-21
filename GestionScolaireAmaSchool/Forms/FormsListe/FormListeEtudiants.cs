@@ -13,20 +13,19 @@ namespace GestionScolaireAmaSchool.Forms.FormsListe
 {
     public partial class FormListeEtudiants : Form
     {
+        private DbContextAmaSchool Db;
+       
         public FormListeEtudiants()
-        {
+        {      
+            Db = new DbContextAmaSchool();
+
             InitializeComponent();
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void FormListeEtudiants_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnAddEtu_Click(object sender, EventArgs e)
-        {
-            
-            
+            dtgvlisteEtudiant.DataSource = null;
+            var liste = Db.Etudiant.ToList();
         }
     }
 }

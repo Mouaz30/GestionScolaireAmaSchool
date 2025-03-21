@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class premiereMigratio : DbMigration
+    public partial class PremierMigration : DbMigration
     {
         public override void Up()
         {
@@ -15,38 +15,6 @@
                         NomClasse = c.String(nullable: false, maxLength: 100),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Cours",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        NomCours = c.String(nullable: false, maxLength: 100),
-                        Description = c.String(maxLength: 255),
-                        Classes_Id = c.Int(),
-                        Matieres_Id = c.Int(),
-                        Professeurs_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Classes", t => t.Classes_Id)
-                .ForeignKey("dbo.Matieres", t => t.Matieres_Id)
-                .ForeignKey("dbo.Professeurs", t => t.Professeurs_Id)
-                .Index(t => t.Classes_Id)
-                .Index(t => t.Matieres_Id)
-                .Index(t => t.Professeurs_Id);
-            
-            CreateTable(
-                "dbo.ClassesCours",
-                c => new
-                    {
-                        IdClasse = c.Int(nullable: false),
-                        IdCours = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.IdClasse, t.IdCours })
-                .ForeignKey("dbo.Classes", t => t.IdClasse, cascadeDelete: true)
-                .ForeignKey("dbo.Cours", t => t.IdCours, cascadeDelete: true)
-                .Index(t => t.IdClasse)
-                .Index(t => t.IdCours);
             
             CreateTable(
                 "dbo.Etudiants",
@@ -68,22 +36,40 @@
                 .Index(t => t.IdClasse);
             
             CreateTable(
-                "dbo.Notes",
+                "dbo.ClassesCours",
+                c => new
+                    {
+                        IdClasse = c.Int(nullable: false),
+                        IdCours = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.IdClasse, t.IdCours })
+                .ForeignKey("dbo.Classes", t => t.IdClasse, cascadeDelete: true)
+                .ForeignKey("dbo.Cours", t => t.IdCours, cascadeDelete: true)
+                .Index(t => t.IdClasse)
+                .Index(t => t.IdCours);
+            
+            CreateTable(
+                "dbo.Cours",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        IdEtudiant = c.Int(nullable: false),
-                        IdMatiere = c.Int(nullable: false),
-                        Valeur = c.Single(nullable: false),
-                        Classes_Id = c.Int(),
+                        NomCours = c.String(nullable: false, maxLength: 100),
+                        Description = c.String(maxLength: 255),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Etudiants", t => t.IdEtudiant, cascadeDelete: true)
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.CoursMatieres",
+                c => new
+                    {
+                        IdCours = c.Int(nullable: false),
+                        IdMatiere = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.IdCours, t.IdMatiere })
+                .ForeignKey("dbo.Cours", t => t.IdCours, cascadeDelete: true)
                 .ForeignKey("dbo.Matieres", t => t.IdMatiere, cascadeDelete: true)
-                .ForeignKey("dbo.Classes", t => t.Classes_Id)
-                .Index(t => t.IdEtudiant)
-                .Index(t => t.IdMatiere)
-                .Index(t => t.Classes_Id);
+                .Index(t => t.IdCours)
+                .Index(t => t.IdMatiere);
             
             CreateTable(
                 "dbo.Matieres",
@@ -95,32 +81,19 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Professeurs",
+                "dbo.Notes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Nom = c.String(nullable: false, maxLength: 100),
-                        Prenom = c.String(nullable: false, maxLength: 100),
-                        Email = c.String(nullable: false, maxLength: 100),
-                        Telephone = c.String(maxLength: 15),
-                        Classes_Id = c.Int(),
+                        IdEtudiant = c.Int(nullable: false),
+                        IdMatiere = c.Int(nullable: false),
+                        Valeur = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Classes", t => t.Classes_Id)
-                .Index(t => t.Classes_Id);
-            
-            CreateTable(
-                "dbo.CoursMatieres",
-                c => new
-                    {
-                        CoursId = c.Int(nullable: false),
-                        MatiereId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.CoursId, t.MatiereId })
-                .ForeignKey("dbo.Cours", t => t.CoursId, cascadeDelete: true)
-                .ForeignKey("dbo.Matieres", t => t.MatiereId, cascadeDelete: true)
-                .Index(t => t.CoursId)
-                .Index(t => t.MatiereId);
+                .ForeignKey("dbo.Etudiants", t => t.IdEtudiant, cascadeDelete: true)
+                .ForeignKey("dbo.Matieres", t => t.IdMatiere, cascadeDelete: true)
+                .Index(t => t.IdEtudiant)
+                .Index(t => t.IdMatiere);
             
             CreateTable(
                 "dbo.OTPCodes",
@@ -146,6 +119,21 @@
                         Telephone = c.String(maxLength: 15),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Professeurs",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Nom = c.String(nullable: false, maxLength: 100),
+                        Prenom = c.String(nullable: false, maxLength: 100),
+                        Email = c.String(nullable: false, maxLength: 100),
+                        Telephone = c.String(maxLength: 15),
+                        Utilisateur_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Utilisateurs", t => t.Utilisateur_Id)
+                .Index(t => t.Utilisateur_Id);
             
             CreateTable(
                 "dbo.ProfesseursClasses",
@@ -182,46 +170,38 @@
             DropForeignKey("dbo.ProfesseursClasses", "IdProfesseur", "dbo.Professeurs");
             DropForeignKey("dbo.ProfesseursClasses", "IdClasse", "dbo.Classes");
             DropForeignKey("dbo.OTPCodes", "IdUtilisateur", "dbo.Utilisateurs");
-            DropForeignKey("dbo.CoursMatieres", "MatiereId", "dbo.Matieres");
-            DropForeignKey("dbo.CoursMatieres", "CoursId", "dbo.Cours");
-            DropForeignKey("dbo.Professeurs", "Classes_Id", "dbo.Classes");
-            DropForeignKey("dbo.Cours", "Professeurs_Id", "dbo.Professeurs");
-            DropForeignKey("dbo.Notes", "Classes_Id", "dbo.Classes");
+            DropForeignKey("dbo.Professeurs", "Utilisateur_Id", "dbo.Utilisateurs");
             DropForeignKey("dbo.Notes", "IdMatiere", "dbo.Matieres");
-            DropForeignKey("dbo.Cours", "Matieres_Id", "dbo.Matieres");
             DropForeignKey("dbo.Notes", "IdEtudiant", "dbo.Etudiants");
-            DropForeignKey("dbo.Etudiants", "IdClasse", "dbo.Classes");
-            DropForeignKey("dbo.Cours", "Classes_Id", "dbo.Classes");
+            DropForeignKey("dbo.CoursMatieres", "IdMatiere", "dbo.Matieres");
+            DropForeignKey("dbo.CoursMatieres", "IdCours", "dbo.Cours");
             DropForeignKey("dbo.ClassesCours", "IdCours", "dbo.Cours");
             DropForeignKey("dbo.ClassesCours", "IdClasse", "dbo.Classes");
+            DropForeignKey("dbo.Etudiants", "IdClasse", "dbo.Classes");
             DropIndex("dbo.ProfesseursMatieres", new[] { "IdMatiere" });
             DropIndex("dbo.ProfesseursMatieres", new[] { "IdProfesseur" });
             DropIndex("dbo.ProfesseursClasses", new[] { "IdClasse" });
             DropIndex("dbo.ProfesseursClasses", new[] { "IdProfesseur" });
+            DropIndex("dbo.Professeurs", new[] { "Utilisateur_Id" });
             DropIndex("dbo.OTPCodes", new[] { "IdUtilisateur" });
-            DropIndex("dbo.CoursMatieres", new[] { "MatiereId" });
-            DropIndex("dbo.CoursMatieres", new[] { "CoursId" });
-            DropIndex("dbo.Professeurs", new[] { "Classes_Id" });
-            DropIndex("dbo.Notes", new[] { "Classes_Id" });
             DropIndex("dbo.Notes", new[] { "IdMatiere" });
             DropIndex("dbo.Notes", new[] { "IdEtudiant" });
-            DropIndex("dbo.Etudiants", new[] { "IdClasse" });
+            DropIndex("dbo.CoursMatieres", new[] { "IdMatiere" });
+            DropIndex("dbo.CoursMatieres", new[] { "IdCours" });
             DropIndex("dbo.ClassesCours", new[] { "IdCours" });
             DropIndex("dbo.ClassesCours", new[] { "IdClasse" });
-            DropIndex("dbo.Cours", new[] { "Professeurs_Id" });
-            DropIndex("dbo.Cours", new[] { "Matieres_Id" });
-            DropIndex("dbo.Cours", new[] { "Classes_Id" });
+            DropIndex("dbo.Etudiants", new[] { "IdClasse" });
             DropTable("dbo.ProfesseursMatieres");
             DropTable("dbo.ProfesseursClasses");
+            DropTable("dbo.Professeurs");
             DropTable("dbo.Utilisateurs");
             DropTable("dbo.OTPCodes");
-            DropTable("dbo.CoursMatieres");
-            DropTable("dbo.Professeurs");
-            DropTable("dbo.Matieres");
             DropTable("dbo.Notes");
-            DropTable("dbo.Etudiants");
-            DropTable("dbo.ClassesCours");
+            DropTable("dbo.Matieres");
+            DropTable("dbo.CoursMatieres");
             DropTable("dbo.Cours");
+            DropTable("dbo.ClassesCours");
+            DropTable("dbo.Etudiants");
             DropTable("dbo.Classes");
         }
     }

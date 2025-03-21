@@ -49,14 +49,18 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 
             
         }
+        public void clear()
+        {
+            txtNomClasse.Text = "";
+        }
 
         public void refresh()
         {
-           dataGridView1.DataSource = null;
+           dataGridViewClasse.DataSource = null;
           
             using (var db = new DbContextAmaSchool())
             {
-                dataGridView1.DataSource = db.Classe.ToList();
+                dataGridViewClasse.DataSource = db.Classe.ToList();
             }
         }
 
@@ -64,7 +68,7 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
         {
             
             refresh();
-            dataGridView1.Columns["Etudiants"].Visible = false;
+            dataGridViewClasse.Columns["Etudiants"].Visible = false;
 
         }
 
@@ -73,7 +77,7 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
            
             using (var db = new DbContextAmaSchool())
             {
-                int id = (int)dataGridView1.CurrentRow.Cells["id"].Value;
+                int id = (int)dataGridViewClasse.CurrentRow.Cells["id"].Value;
                 var Classe = db.Classe.Find(id);
 
                 db.Classe.Remove(Classe);
@@ -86,9 +90,9 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (dataGridView1.CurrentRow != null)
+            if (dataGridViewClasse.CurrentRow != null)
             {
-                int id = (int)dataGridView1.CurrentRow.Cells["id"].Value;
+                int id = (int)dataGridViewClasse.CurrentRow.Cells["id"].Value;
                 using (var db = new DbContextAmaSchool())
                 {
                    var Classes = db.Classe.Find(id);
@@ -120,7 +124,7 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
 
             using (var db = new DbContextAmaSchool())
             {
-                int id = (int)dataGridView1.CurrentRow.Cells["id"].Value;
+                int id = (int)dataGridViewClasse.CurrentRow.Cells["id"].Value;
                 var classe = db.Classe.Find(id);
 
                 if (classe != null) 
@@ -142,7 +146,7 @@ namespace GestionScolaireAmaSchool.Forms.FormsGestion
         {
             using(var db = new DbContextAmaSchool())
             {
-                int id = (int)dataGridView1.CurrentRow.Cells["id"].Value;
+                int id = (int)dataGridViewClasse.CurrentRow.Cells["id"].Value;
                 var Classe = db.Classe.Find(id);
                 Classe.NomClasse = txtNomClasse.Text;
                 db.SaveChanges();

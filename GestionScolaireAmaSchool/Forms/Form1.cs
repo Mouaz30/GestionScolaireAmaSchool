@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestionScolaireAmaSchool.Forms.FormsGestion;
+using GestionScolaireAmaSchool.Forms.FormsListe;
 
 namespace GestionScolaireAmaSchool
 {
@@ -48,5 +49,36 @@ namespace GestionScolaireAmaSchool
             FormGestionCoursMatiere formGestionCoursMatiere = new FormGestionCoursMatiere();
             formGestionCoursMatiere.Show();
         }
+
+        private void listeClasseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormListeClasses formListeClasse = new FormListeClasses();
+            formListeClasse.Show();
+        }
+
+        private void listeEtudiantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormListeEtudiants formListeEtudiant = new FormListeEtudiants();
+            formListeEtudiant.Show();
+        }
+
+        private void listeProfesseurToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormListeProfesseur formListeProfesseur = new FormListeProfesseur();
+            formListeProfesseur.Show();
+        }
+
+        private void listeMatiereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormListeMatieres formListeMatieres = new FormListeMatieres();
+            formListeMatieres.Show();
+        }
+
+        private void listeCoursMatieresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormListeCours formListeCoursMatieres = new FormListeCours();
+            formListeCoursMatieres.Show();
+        }
+
     }
 }

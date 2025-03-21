@@ -167,9 +167,21 @@
     <Compile Include="Forms\FormsListe\FormListeMatieres.Designer.cs">
       <DependentUpon>FormListeMatieres.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503172333425_premiereMigratio.cs" />
-    <Compile Include="Migrations\202503172333425_premiereMigratio.Designer.cs">
-      <DependentUpon>202503172333425_premiereMigratio.cs</DependentUpon>
+    <Compile Include="Forms\FormsListe\FormListeProfesseur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormsListe\FormListeProfesseur.Designer.cs">
+      <DependentUpon>FormListeProfesseur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormsListe\FormListeUtilisateur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormsListe\FormListeUtilisateur.Designer.cs">
+      <DependentUpon>FormListeUtilisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503201230579_PremierMigration.cs" />
+    <Compile Include="Migrations\202503201230579_PremierMigration.Designer.cs">
+      <DependentUpon>202503201230579_PremierMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -195,11 +207,23 @@
     <EmbeddedResource Include="Forms\FormsListe\FormListeClasses.resx">
       <DependentUpon>FormListeClasses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormsListe\FormListeCours.resx">
+      <DependentUpon>FormListeCours.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormsListe\FormListeEtudiants.resx">
       <DependentUpon>FormListeEtudiants.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503172333425_premiereMigratio.resx">
-      <DependentUpon>202503172333425_premiereMigratio.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormsListe\FormListeMatieres.resx">
+      <DependentUpon>FormListeMatieres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormsListe\FormListeProfesseur.resx">
+      <DependentUpon>FormListeProfesseur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormsListe\FormListeUtilisateur.resx">
+      <DependentUpon>FormListeUtilisateur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503201230579_PremierMigration.resx">
+      <DependentUpon>202503201230579_PremierMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

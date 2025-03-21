@@ -7,13 +7,13 @@ namespace GestionScolaireAmaSchool.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class premiereMigratio : IMigrationMetadata
+    public sealed partial class PremierMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(premiereMigratio));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PremierMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202503172333425_premiereMigratio"; }
+            get { return "202503201230579_PremierMigration"; }
         }
         
         string IMigrationMetadata.Source

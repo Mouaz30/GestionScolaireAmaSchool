@@ -28,12 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.dtgvMatiere = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvMatiere)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dtgvMatiere
+            // 
+            this.dtgvMatiere.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvMatiere.Location = new System.Drawing.Point(148, 87);
+            this.dtgvMatiere.Name = "dtgvMatiere";
+            this.dtgvMatiere.RowHeadersWidth = 62;
+            this.dtgvMatiere.RowTemplate.Height = 28;
+            this.dtgvMatiere.Size = new System.Drawing.Size(802, 276);
+            this.dtgvMatiere.TabIndex = 1;
+            // 
+            // FormListeMatieres
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1073, 450);
+            this.Controls.Add(this.dtgvMatiere);
+            this.Name = "FormListeMatieres";
             this.Text = "FormListeMatieres";
+            this.Load += new System.EventHandler(this.FormListeMatieres_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvMatiere)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView dtgvMatiere;
     }
 }
